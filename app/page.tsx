@@ -43,9 +43,12 @@ export default function ChatPage() {
     setLoading(true)
 
     try {
-      const response = await fetch('/api/ask', {
+      const response = await fetch('https://prd.myintent.cc/ask', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': 'EslgAkoe3hplpjHPG1UGscsH56MBfUyB',
+        },
         body: JSON.stringify({ query }),
       })
 
