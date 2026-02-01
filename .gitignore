@@ -1,8 +1,18 @@
 # Dependencies
 node_modules/
 
-# Build output
+# Next.js
+.next/
+out/
+
+# Build
 dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
 
 # IDE
 .idea/
@@ -16,7 +26,11 @@ Thumbs.db
 
 # Logs
 *.log
+npm-debug.log*
 
-# Local config (may contain API keys)
-*.local.ts
-*.local.js
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
