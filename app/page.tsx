@@ -112,43 +112,42 @@ export default function ChatPage() {
         {messages.map(message => (
           <div
             key={message.id}
-            className={`flex flex-col mb-3 ${
-              message.role === 'user'
-                ? 'items-end'
-                : 'items-start'
+            className={`flex mb-3 ${
+              message.role === 'user' ? 'justify-end' : 'justify-start'
             }`}
           >
-            <div
-              className={`max-w-full px-3 py-2 rounded-2xl break-words overflow-hidden ${
-                message.role === 'user'
-                  ? 'bg-indigo-600 text-white rounded-br-sm'
-                  : 'bg-white text-gray-800 rounded-bl-sm shadow-sm'
-              }`}
-            >
-              <p className="text-sm leading-relaxed whitespace-pre-wrap break-all">
-                {message.content}
-              </p>
-            </div>
+            <div className="max-w-[90%] min-w-0">
+              <div
+                className={`px-3 py-2 rounded-2xl ${
+                  message.role === 'user'
+                    ? 'bg-indigo-600 text-white rounded-br-sm'
+                    : 'bg-white text-gray-800 rounded-bl-sm shadow-sm'
+                }`}
+                style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}
+              >
+                <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                  {message.content}
+                </p>
+              </div>
 
-            {/* 来源链接 */}
-            {message.sources && message.sources.length > 0 && (
-              <div className="mt-2 px-2 py-2 bg-gray-50 rounded-lg text-xs max-w-full overflow-hidden">
-                <div className="text-gray-500 mb-1">来源：</div>
-                <div className="flex flex-col gap-1">
+              {/* 来源链接 */}
+              {message.sources && message.sources.length > 0 && (
+                <div className="mt-2 px-2 py-2 bg-gray-50 rounded-lg text-xs">
+                  <div className="text-gray-500 mb-1">来源：</div>
                   {message.sources.map((source) => (
                     <a
                       key={source.url}
                       href={source.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-indigo-600 hover:underline truncate block"
+                      className="text-indigo-600 hover:underline block truncate"
                     >
                       {source.title}
                     </a>
                   ))}
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         ))}
 
