@@ -1,0 +1,13 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "prd-chat-gadget",
+  "appid": "",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true
+  },
+  "compileType": "miniprogram"
+}
