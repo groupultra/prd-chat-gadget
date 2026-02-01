@@ -47,7 +47,7 @@ export default function ChatPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': 'EslgAkoe3hplpjHPG1UGscsH56MBfUyB',
+          'X-API-Key': '6da6809e6d11d6f3edde32040650ceebe7537597f0097549',
         },
         body: JSON.stringify({ query }),
       })
