@@ -92,9 +92,9 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
+    <div className="flex flex-col h-screen bg-gray-100 overflow-x-hidden">
       {/* 消息列表 */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden p-3">
         {/* 欢迎消息 */}
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center">
@@ -112,43 +112,41 @@ export default function ChatPage() {
         {messages.map(message => (
           <div
             key={message.id}
-            className={`flex flex-col mb-4 max-w-[85%] ${
+            className={`flex flex-col mb-3 ${
               message.role === 'user'
-                ? 'self-end items-end ml-auto'
-                : 'self-start items-start'
+                ? 'items-end'
+                : 'items-start'
             }`}
           >
             <div
-              className={`px-4 py-3 rounded-2xl break-words ${
+              className={`max-w-full px-3 py-2 rounded-2xl break-words overflow-hidden ${
                 message.role === 'user'
                   ? 'bg-indigo-600 text-white rounded-br-sm'
                   : 'bg-white text-gray-800 rounded-bl-sm shadow-sm'
               }`}
             >
-              <p className="text-sm leading-relaxed whitespace-pre-wrap">
+              <p className="text-sm leading-relaxed whitespace-pre-wrap break-all">
                 {message.content}
               </p>
             </div>
 
             {/* 来源链接 */}
             {message.sources && message.sources.length > 0 && (
-              <div className="mt-2 px-3 py-2 bg-gray-50 rounded-lg text-xs">
-                <span className="text-gray-500">来源：</span>
-                {message.sources.map((source, index) => (
-                  <span key={source.url}>
+              <div className="mt-2 px-2 py-2 bg-gray-50 rounded-lg text-xs max-w-full overflow-hidden">
+                <div className="text-gray-500 mb-1">来源：</div>
+                <div className="flex flex-col gap-1">
+                  {message.sources.map((source) => (
                     <a
+                      key={source.url}
                       href={source.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-indigo-600 hover:underline ml-1"
+                      className="text-indigo-600 hover:underline truncate block"
                     >
                       {source.title}
                     </a>
-                    {index < message.sources!.length - 1 && (
-                      <span className="text-gray-400">、</span>
-                    )}
-                  </span>
-                ))}
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -156,8 +154,8 @@ export default function ChatPage() {
 
         {/* 加载中 */}
         {loading && (
-          <div className="flex flex-col mb-4 max-w-[85%] self-start items-start">
-            <div className="px-5 py-4 bg-white rounded-2xl rounded-bl-sm shadow-sm flex items-center gap-1">
+          <div className="flex flex-col mb-3 items-start">
+            <div className="px-4 py-3 bg-white rounded-2xl rounded-bl-sm shadow-sm flex items-center gap-1">
               <div className="dot w-2 h-2 bg-gray-400 rounded-full" />
               <div className="dot w-2 h-2 bg-gray-400 rounded-full" />
               <div className="dot w-2 h-2 bg-gray-400 rounded-full" />
@@ -169,20 +167,20 @@ export default function ChatPage() {
       </div>
 
       {/* 输入区域 */}
-      <div className="flex items-center gap-3 p-4 bg-white border-t border-gray-200 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+      <div className="flex items-center gap-2 p-3 bg-white border-t border-gray-200 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
         <input
           type="text"
           value={inputValue}
           onChange={e => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="输入你的问题..."
+          placeholder="输入问题..."
           disabled={loading}
-          className="flex-1 h-10 px-4 bg-gray-100 rounded-full text-sm outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
+          className="flex-1 min-w-0 h-9 px-3 bg-gray-100 rounded-full text-sm outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
         />
         <button
           onClick={handleSend}
           disabled={loading || !inputValue.trim()}
-          className="h-10 px-5 bg-indigo-600 text-white text-sm font-medium rounded-full disabled:bg-gray-400 hover:bg-indigo-700 transition-colors"
+          className="shrink-0 h-9 px-4 bg-indigo-600 text-white text-sm font-medium rounded-full disabled:bg-gray-400 hover:bg-indigo-700 transition-colors"
         >
           发送
         </button>
